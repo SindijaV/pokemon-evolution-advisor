@@ -100,7 +100,11 @@ function displayResult(selectedPokemon, evolutions) {
 
   if (evolutions.length === 0) {
     resultSection.innerHTML = `
-      <h2>${formatName(selectedPokemon.pokemon)}</h2>
+      <h2>Your Pokémon</h2>
+      <article class="pokemon-card solo-card" data-type="${getVisualType(selectedPokemon)}">
+      <span class="card-stage">Current Pokémon</span>
+      <h3>${formatName(selectedPokemon.pokemon)}</h3>
+      ${renderTypeBadge(selectedPokemon)}
 
       <img
   src="${getImageUrl(selectedPokemon)}"
@@ -116,7 +120,8 @@ function displayResult(selectedPokemon, evolutions) {
       <p><strong>Special defense:</strong> ${selectedPokemon.special_defense}</p>
       <p><strong>Speed:</strong> ${selectedPokemon.speed}</p>
 
-      <h3>No direct evolution was found.</h3>
+      </article>
+      <section class="recommendation"><h3>No direct evolution was found.</h3></section>
     `;
 
     return;
@@ -138,8 +143,10 @@ const improvementPercentage =
     <h2>Evolution comparison</h2>
 
     <div class="pokemon-comparison">
-      <article class="pokemon-card">
-        <h3>Current: ${formatName(selectedPokemon.pokemon)}</h3>
+      <article class="pokemon-card" data-type="${getVisualType(selectedPokemon)}">
+        <span class="card-stage">Current Pokémon</span>
+        <h3>${formatName(selectedPokemon.pokemon)}</h3>
+        ${renderTypeBadge(selectedPokemon)}
 
         <img
           src="${getImageUrl(selectedPokemon)}"
@@ -157,8 +164,10 @@ const improvementPercentage =
         <p><strong>Total statistics:</strong> ${currentTotal}</p>
       </article>
 
-      <article class="pokemon-card evolved-card">
-        <h3>Evolution: ${formatName(evolvedPokemon.pokemon)}</h3>
+      <article class="pokemon-card evolved-card" data-type="${getVisualType(evolvedPokemon)}">
+        <span class="card-stage">Next evolution ✦</span>
+        <h3>${formatName(evolvedPokemon.pokemon)}</h3>
+        ${renderTypeBadge(evolvedPokemon)}
 
         <img
           src="${getImageUrl(evolvedPokemon)}"
@@ -208,4 +217,15 @@ function calculateTotalStats(pokemon) {
 
 function getImageUrl(pokemon) {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+}
+// Presentation only: type themes do not affect matching or recommendations.
+function getVisualType(pokemon) {
+  const types = ["normal", "fire", "water", "electric", "grass", "ice",
+    "fighting", "poison", "ground", "flying", "psychic", "bug", "rock",
+    "ghost", "dragon", "dark", "steel", "fairy"];
+  return types.includes(pokemon.type_1) ? pokemon.type_1 : "normal";
+}
+
+function renderTypeBadge(pokemon) {
+  return `<span class="type-badge">${formatName(getVisualType(pokemon))}</span>`;
 }
