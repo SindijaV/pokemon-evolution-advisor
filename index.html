@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pokémon Evolution Advisor</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <main>
+    <header>
+      <h1>Pokémon Evolution Advisor</h1>
+      <p>Compare your Pokémon with its next evolution.</p>
+    </header>
+
+    <section class="search-section">
+      <label for="pokemon-select">Choose a Pokémon</label>
+      <select id="pokemon-select">
+        <option value="">Select a Pokémon</option>
+      </select>
+    </section>
+
+    <section id="result" class="result" hidden>
+      <!-- JavaScript will insert the comparison here -->
+    </section>
+
+    <section class="method">
+      <h2>How the recommendation works</h2>
+      <p>
+        The recommendation compares the six base statistics in the supplied
+        dataset. It does not consider moves, game-specific requirements, or
+        personal preference.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
