@@ -4,7 +4,7 @@ A small website that helps users decide whether to evolve a Pokémon by comparin
 
 ## Live website
 
-The live website link will be added after deployment with GitHub Pages.
+https://sindijav.github.io/pokemon-evolution-advisor/ 
 
 ## Features
 
